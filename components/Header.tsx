@@ -11,6 +11,15 @@ const Header: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Prevent scrolling when menu is open
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+  }, [isMenuOpen]);
+
   const navLinks = [
     { name: 'Process', href: '#process' },
     { name: 'Results', href: '#testimonials' },
@@ -32,23 +41,14 @@ const Header: React.FC = () => {
               viewBox="0 0 100 100" 
               className="w-full h-full fill-current filter drop-shadow-[0_2px_3px_rgba(0,0,0,0.5)] transition-transform duration-700 group-hover:rotate-12"
             >
-              {/* Top Piece */}
               <path d="M44 27 h8 v14 l-9 -3 z" />
-              {/* Top Right Piece */}
               <path d="M54 36 h14 l-4 6 h-10 z" />
-              {/* Right Piece */}
               <path d="M55 43 l14 6 h-14 z" />
-              {/* Bottom Right Piece */}
               <path d="M54 50 h10 v11 l-10 -3 z" />
-              {/* Bottom Piece */}
               <path d="M50 58 v13 l-6 -8 z" />
-              {/* Bottom Left Piece */}
               <path d="M38 56 l11 -8 v8 l-11 7 z" />
-              {/* Left Piece */}
               <path d="M27 48 h17 l-7 8 z" />
-              {/* Top Left Piece */}
               <path d="M35 35 l11 10 v2 l-11 2 z" />
-              {/* Center Piece */}
               <path d="M48 43 h12 l-7 6 z" />
             </svg>
           </div>
@@ -82,31 +82,65 @@ const Header: React.FC = () => {
         </div>
 
         <button 
-          className="lg:hidden p-2 text-white"
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
-          aria-expanded={isMenuOpen}
-          aria-label="Toggle Menu"
+          className="lg:hidden p-2 text-white flex flex-col items-end gap-1.5"
+          onClick={() => setIsMenuOpen(true)}
+          aria-label="Open Menu"
         >
-          <div className={`w-8 h-[2px] bg-white transition-all mb-2 ${isMenuOpen ? 'rotate-45 translate-y-2.5' : ''}`}></div>
-          <div className={`w-6 h-[2px] bg-white ml-auto transition-all ${isMenuOpen ? '-rotate-45 -translate-y-[2px] w-8' : ''}`}></div>
+          <div className="w-8 h-[2px] bg-white"></div>
+          <div className="w-5 h-[2px] bg-white"></div>
         </button>
       </div>
 
       {/* Mobile Drawer */}
-      <div className={`fixed inset-0 bg-brand-dark/95 backdrop-blur-2xl z-40 lg:hidden transition-transform duration-500 flex flex-col p-12 ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
-        <div className="mt-20 flex flex-col gap-10">
-          {navLinks.map((link) => (
+      <div 
+        className={`fixed inset-0 bg-brand-dark/98 backdrop-blur-3xl z-[100] lg:hidden transition-all duration-500 ease-in-out flex flex-col p-12 ${
+          isMenuOpen ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-full pointer-events-none'
+        }`}
+      >
+        <div className="flex justify-between items-center">
+          <span className="text-[12px] font-black tracking-pro-wide text-brand-gold uppercase">Navigation</span>
+          <button 
+            onClick={() => setIsMenuOpen(false)} 
+            className="group flex items-center justify-center w-12 h-12 rounded-full border border-white/10 hover:border-brand-gold hover:bg-brand-gold transition-all duration-500"
+            aria-label="Close Menu"
+          >
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-white group-hover:text-brand-dark transition-colors">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+
+        <div className="mt-20 flex flex-col gap-8">
+          {navLinks.map((link, idx) => (
             <a 
               key={link.name}
               href={link.href}
               onClick={() => setIsMenuOpen(false)}
-              className="text-5xl font-serif italic text-white/20 hover:text-brand-gold transition-all"
+              className="text-5xl sm:text-6xl font-serif italic text-white/10 hover:text-brand-gold transition-all duration-500 translate-y-4 opacity-0 animate-[fade-in-up_0.5s_forwards]"
+              style={{ animationDelay: `${idx * 0.1}s` }}
             >
               {link.name}
             </a>
           ))}
         </div>
+
+        <div className="mt-auto pt-12 border-t border-white/5 flex flex-col gap-6">
+           <p className="text-[10px] font-black uppercase tracking-[0.4em] text-white/20">Principal Inquiry</p>
+           <a href="mailto:partnerships@accessdeal.com" className="text-xl font-bold text-white/60 hover:text-brand-gold transition-colors">
+             partnerships@accessdeal.com
+           </a>
+        </div>
       </div>
+      
+      <style>{`
+        @keyframes fade-in-up {
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+      `}</style>
     </header>
   );
 };
