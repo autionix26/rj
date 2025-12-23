@@ -3,45 +3,40 @@ import React from 'react';
 
 const Comparison: React.FC = () => {
   const standard = [
-    { title: "Generic Outreach", desc: "Messaging is too broad and fails to resonate with prospect's unique pain points." },
-    { title: "Missed Opportunities", desc: "You might overlook potential clients who need your help but don't fit the usual criteria." },
-    { title: "Wasted Resources", desc: "Time and effort are spent on leads that aren't interested, leading to lost revenue." },
-    { title: "Advertising Cost Spiral", desc: "When cold emails fail, companies panic-pivot to paid ads with inflated CPAs." }
+    { title: "Generic Volume", desc: "Outdated mass-outreach sequences that fail to resonate with high-level stakeholders." },
+    { title: "Wasted Capital", desc: "Excessive budget drain on broad advertising with inflated CPAs and low intent." },
+    { title: "Static Reports", desc: "Standardized data dumps without context or actionable executive intelligence." }
   ];
 
   const accessDeal = [
-    { title: "Personalized Messaging", desc: "We speak directly to the issues your prospects face, making them more relevant and timely." },
-    { title: "Better Conversion Rates", desc: "Prospects are more likely to buy when they see you providing specific solutions." },
-    { title: "No time wasted on prospection", desc: "We target leads that really need your services, making outreach effective." },
-    { title: "Build Trust", desc: "Showing you understand their challenges helps build retainer-level relationships." },
-    { title: "Faster Revenue Generation", desc: "Targeting only relevant prospects shortens the cycle, accelerating growth." }
+    { title: "Surgical Personalization", desc: "Every engagement speaks directly to verified organizational pain points and mandates." },
+    { title: "Institutional Trust", desc: "Leveraging 15 years of vetted relationships to bypass gatekeepers instantly." },
+    { title: "Accelerated Velocity", desc: "Reducing sales cycles by 40% through high-intent introductions at the principal level." },
+    { title: "Category Exclusivity", desc: "We only partner with one firm per niche. No internal competition for access." }
   ];
 
   return (
-    <section id="comparison" className="bg-brand-dark py-24 md:py-48 border-t border-white/5">
-      <div className="max-w-[1440px] mx-auto px-6 md:px-12">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 md:gap-32 items-center mb-16">
+    <section id="comparison" className="bg-brand-light py-24 md:py-56 border-t border-brand-dark/10">
+      <div className="max-w-[1440px] mx-auto px-6 sm:px-10 md:px-16">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 lg:gap-32 items-stretch">
           
           {/* Left Side: Standard Agencies */}
-          <div>
-            <h2 className="text-4xl md:text-5xl font-normal mb-12 leading-tight font-serif text-white">
-              What 99% of <br />
-              <span className="text-white/30 italic">Lead Gen Agencies do</span>
+          <div className="flex flex-col justify-center">
+            <h2 className="text-4xl sm:text-5xl md:text-7xl font-bold mb-16 leading-tight font-serif text-brand-dark">
+              Why <span className="text-brand-dark/20 italic font-normal">"Lead Gen"</span> <br />
+              Is Failing You.
             </h2>
             <div className="space-y-12">
               {standard.map((item, i) => (
-                <div key={i} className="flex gap-6">
+                <div key={i} className="flex gap-8 group">
                   <div className="flex-shrink-0 mt-1">
-                    <div className="w-6 h-6 rounded-full border border-white/10 flex items-center justify-center">
-                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#666" strokeWidth="3">
-                        <line x1="18" y1="6" x2="6" y2="18"></line>
-                        <line x1="6" y1="6" x2="18" y2="18"></line>
-                      </svg>
+                    <div className="w-10 h-10 rounded-full border-2 border-brand-dark flex items-center justify-center text-brand-dark font-black text-sm">
+                      ✕
                     </div>
                   </div>
                   <div>
-                    <h4 className="text-[17px] font-bold mb-2 text-white/80">{item.title}</h4>
-                    <p className="text-[15px] text-white/40 leading-relaxed font-light">{item.desc}</p>
+                    <h4 className="text-[20px] font-black mb-3 text-brand-dark uppercase tracking-tight">{item.title}</h4>
+                    <p className="text-[17px] text-brand-dark leading-relaxed font-bold">{item.desc}</p>
                   </div>
                 </div>
               ))}
@@ -49,27 +44,31 @@ const Comparison: React.FC = () => {
           </div>
 
           {/* Right Side: The AccessDeal Way */}
-          <div className="bg-brand-black p-10 md:p-16 rounded-sm border border-white/5 shadow-4xl relative overflow-hidden">
-             <div className="absolute top-0 right-0 w-64 h-64 bg-brand-gold/5 blur-3xl"></div>
-            <h2 className="text-4xl md:text-5xl font-bold mb-12 leading-tight text-white">
-              The <span className="italic text-brand-gold">"AccessDeal Way"</span>
+          <div className="bg-black p-12 md:p-20 rounded-sm shadow-2xl relative overflow-hidden flex flex-col justify-center">
+            <div className="absolute top-0 right-0 w-64 h-64 bg-brand-gold/20 blur-[100px] pointer-events-none"></div>
+            
+            <div className="inline-flex items-center gap-4 mb-10">
+              <div className="w-12 h-[3px] bg-brand-gold"></div>
+              <span className="text-[13px] font-black text-brand-gold uppercase tracking-[0.5em]">The Solution</span>
+            </div>
+            
+            <h2 className="text-4xl sm:text-6xl md:text-7xl font-bold mb-16 leading-tight text-white font-serif">
+              The <span className="italic font-normal text-brand-gold">AccessDeal</span> Way
             </h2>
-            <p className="text-white/40 mb-12 text-[16px] leading-relaxed font-light">
-              We replace high-volume noise with high-context facilitation. We don't find "leads"—we build bridges to institutional budget holders.
-            </p>
-            <div className="space-y-10">
+            
+            <div className="space-y-12">
               {accessDeal.map((item, i) => (
-                <div key={i} className="flex gap-6 group">
+                <div key={i} className="flex gap-8 group">
                   <div className="flex-shrink-0 mt-1">
-                    <div className="w-6 h-6 rounded-full bg-brand-gold flex items-center justify-center shadow-[0_0_15px_rgba(197,160,89,0.2)]">
-                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#051111" strokeWidth="3">
+                    <div className="w-10 h-10 rounded-full bg-brand-gold flex items-center justify-center text-black shadow-[0_0_20px_rgba(184,134,11,0.5)]">
+                      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="4">
                         <polyline points="20 6 9 17 4 12"></polyline>
                       </svg>
                     </div>
                   </div>
                   <div>
-                    <h4 className="text-[17px] font-bold mb-2 text-white group-hover:text-brand-gold transition-colors">{item.title}</h4>
-                    <p className="text-[15px] text-white/50 leading-relaxed font-light">{item.desc}</p>
+                    <h4 className="text-[21px] font-black mb-3 text-white uppercase tracking-tight">{item.title}</h4>
+                    <p className="text-[17px] text-white/90 leading-relaxed font-bold group-hover:text-white transition-colors duration-500">{item.desc}</p>
                   </div>
                 </div>
               ))}

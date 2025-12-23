@@ -7,10 +7,10 @@
     <title>AccessDeal | Private B2B Connector</title>
     
     <!-- Critical Preloads -->
-    <link rel="preload" as="image" href="https://images.unsplash.com/photo-1530026405186-ed1f139313f8?fm=webp&q=75&w=600" fetchpriority="high">
+    <link rel="preload" as="image" href="https://images.unsplash.com/photo-1530026405186-ed1f139313f8?fm=webp&q=75&w=1200" fetchpriority="high">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Instrument+Serif:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Instrument+Serif:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
     
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -19,19 +19,21 @@
           extend: {
             colors: {
               brand: {
-                DEFAULT: '#123524',
-                dark: '#051111',
-                black: '#020707',
-                gold: '#C5A059',
-                light: '#FDFCFB'
+                DEFAULT: '#0A1A12',
+                dark: '#0A1A12',
+                black: '#050D09',
+                gold: '#B8860B',
+                light: '#FCFAF7',
+                stone: '#F1EEE9'
               }
             },
             fontFamily: {
               serif: ['"Instrument Serif"', 'serif'],
               sans: ['Inter', 'sans-serif'],
             },
-            animation: {
-              'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+            boxShadow: {
+              'premium': '0 20px 50px -12px rgba(10, 26, 18, 0.12)',
+              'premium-hover': '0 30px 60px -12px rgba(10, 26, 18, 0.18)',
             }
           }
         }
@@ -40,34 +42,24 @@
     
     <style>
         :root {
-          --brand-green: #123524;
-          --brand-gold: #C5A059;
+          --brand-green: #0A1A12;
+          --brand-gold: #B8860B;
+          --brand-cream: #FCFAF7;
         }
         
         body { 
           font-family: 'Inter', sans-serif; 
-          background-color: #051111; 
-          color: #FFFFFF; 
+          background-color: #FCFAF7; 
+          color: #0A1A12; 
           -webkit-font-smoothing: antialiased;
           margin: 0;
           overflow-x: hidden;
         }
 
-        /* High-End Grain Texture Overlay */
-        body::before {
-          content: "";
-          position: fixed;
-          top: 0; left: 0; width: 100%; height: 100%;
-          pointer-events: none;
-          z-index: 9999;
-          background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-          opacity: 0.03;
-        }
-
         .section-fade-in {
           opacity: 0;
-          transform: translateY(20px);
-          transition: opacity 1s cubic-bezier(0.25, 0.1, 0.25, 1), transform 1s cubic-bezier(0.25, 0.1, 0.25, 1);
+          transform: translateY(30px);
+          transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
         }
         .section-visible {
           opacity: 1;
@@ -79,38 +71,36 @@
           100% { transform: translate3d(-50%, 0, 0); } 
         }
         .animate-marquee { 
-          animation: marquee 100s linear infinite; 
+          animation: marquee 80s linear infinite; 
           will-change: transform;
         }
 
         @keyframes heartbeat {
-          0% { transform: scale(1); opacity: 1; filter: drop-shadow(0 0 0px rgba(197,160,89,0)); }
-          15% { transform: scale(1.15); opacity: 0.9; filter: drop-shadow(0 0 8px rgba(197,160,89,0.5)); }
-          30% { transform: scale(1); opacity: 1; filter: drop-shadow(0 0 2px rgba(197,160,89,0.2)); }
-          45% { transform: scale(1.1); opacity: 0.9; filter: drop-shadow(0 0 6px rgba(197,160,89,0.4)); }
-          100% { transform: scale(1); opacity: 1; filter: drop-shadow(0 0 0px rgba(197,160,89,0)); }
+          0% { transform: scale(1); opacity: 1; }
+          50% { transform: scale(1.1); opacity: 0.9; }
+          100% { transform: scale(1); opacity: 1; }
         }
         .animate-heartbeat {
-          animation: heartbeat 4s ease-in-out infinite;
+          animation: heartbeat 3s ease-in-out infinite;
         }
         
         ::selection {
-          background: #C5A059;
-          color: #051111;
+          background: #0A1A12;
+          color: #FCFAF7;
         }
 
         .glass-header {
-          background: rgba(5, 17, 17, 0.85);
+          background: rgba(252, 250, 247, 0.95);
           backdrop-filter: blur(20px);
           -webkit-backdrop-filter: blur(20px);
-          border-bottom: 1px solid rgba(255,255,255,0.05);
+          border-bottom: 1px solid rgba(10, 26, 18, 0.08);
         }
 
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-track { background: #020707; }
-        ::-webkit-scrollbar-thumb { background: #123524; border-radius: 10px; }
-        ::-webkit-scrollbar-thumb:hover { background: #C5A059; }
+        /* High-End Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #FCFAF7; }
+        ::-webkit-scrollbar-thumb { background: #D1CEC9; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #0A1A12; }
     </style>
 <script type="importmap">
 {

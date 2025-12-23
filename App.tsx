@@ -41,32 +41,35 @@ const LazySection: React.FC<{ children: React.ReactNode; id?: string }> = ({ chi
       ref={sectionRef} 
       id={id} 
       className={`section-fade-in ${isVisible ? 'section-visible' : ''}`}
-      style={{ minHeight: isVisible ? 'auto' : '300px' }}
+      style={{ minHeight: isVisible ? 'auto' : '100px' }}
     >
-      {isVisible && (
-        <Suspense fallback={<div className="h-64 w-full bg-brand-dark opacity-10" />}>
+      {isVisible ? (
+        <Suspense fallback={<div className="h-64 w-full bg-brand-light opacity-50" />}>
           {children}
         </Suspense>
-      )}
+      ) : <div className="h-20" />}
     </div>
   );
 };
 
 const App: React.FC = () => {
   return (
-    <div className="min-h-screen selection:bg-brand-gold selection:text-brand-dark antialiased bg-brand-dark text-white">
+    <div className="min-h-screen selection:bg-brand-dark selection:text-brand-light antialiased bg-brand-light text-brand-dark font-sans">
       <Header />
       <main>
+        {/* TOP SECTION: HERO & VIDEO */}
         <section id="hero">
           <Hero />
         </section>
         
+        <div id="video" className="relative z-10">
+          <Suspense fallback={<div className="h-96 bg-brand-light" />}>
+            <VideoSection />
+          </Suspense>
+        </div>
+
         <CompanyMarquee />
 
-        <LazySection id="video">
-          <VideoSection />
-        </LazySection>
-        
         <LazySection id="process">
           <Process />
         </LazySection>
