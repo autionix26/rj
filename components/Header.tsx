@@ -1,107 +1,112 @@
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const Header: React.FC = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const rafRef = useRef<number | null>(null);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      if (rafRef.current) return;
-      rafRef.current = requestAnimationFrame(() => {
-        setIsScrolled(window.scrollY > 40);
-        rafRef.current = null;
-      });
-    };
+    const handleScroll = () => setIsScrolled(window.scrollY > 40);
     window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-      if (rafRef.current) cancelAnimationFrame(rafRef.current);
-    };
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const navLinks = [
     { name: 'Process', href: '#process' },
     { name: 'Results', href: '#testimonials' },
-    { name: 'Approach', href: '#comparison' },
-    { name: 'Models', href: '#exclusivity' },
+    { name: 'Comparison', href: '#comparison' },
+    { name: 'Model', href: '#exclusivity' },
     { name: 'Pricing', href: '#pricing' },
   ];
 
   return (
     <header 
-      className={`fixed top-0 left-0 w-full z-50 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
-        isScrolled ? 'glass-header py-4 shadow-xl' : 'bg-transparent py-8 sm:py-12'
+      className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ease-in-out ${
+        isScrolled ? 'glass-header py-4 shadow-depth' : 'bg-transparent py-10'
       }`}
     >
-      <div className="max-w-[1440px] mx-auto px-6 sm:px-10 md:px-16 flex items-center justify-between">
-        <a href="#hero" className="flex items-center gap-5 group">
-          <div className="relative w-12 h-12 flex items-center justify-center animate-heartbeat text-brand-dark">
-            <svg viewBox="0 0 100 100" className="w-full h-full fill-current">
-              <path d="M45 27 L52 27 L52 41 L43 38 Z" />
-              <path d="M54 36 L68 36 L64 41 L54 41 Z" />
-              <path d="M55 43 L69 49 L55 49 Z" />
-              <path d="M54 50 L64 50 L64 61 L54 58 Z" />
+      <div className="max-w-[1440px] mx-auto px-6 md:px-12 lg:px-16 flex items-center justify-between">
+        <a href="#top" className="flex items-center gap-4 group" aria-label="AccessDeal Home">
+          <div className="relative w-9 h-9 flex items-center justify-center text-brand-gold">
+            <svg 
+              viewBox="0 0 100 100" 
+              className="w-full h-full fill-current filter drop-shadow-[0_2px_3px_rgba(0,0,0,0.5)] transition-transform duration-700 group-hover:rotate-12"
+            >
+              {/* Top Piece */}
+              <path d="M44 27 h8 v14 l-9 -3 z" />
+              {/* Top Right Piece */}
+              <path d="M54 36 h14 l-4 6 h-10 z" />
+              {/* Right Piece */}
+              <path d="M55 43 l14 6 h-14 z" />
+              {/* Bottom Right Piece */}
+              <path d="M54 50 h10 v11 l-10 -3 z" />
+              {/* Bottom Piece */}
+              <path d="M50 58 v13 l-6 -8 z" />
+              {/* Bottom Left Piece */}
+              <path d="M38 56 l11 -8 v8 l-11 7 z" />
+              {/* Left Piece */}
+              <path d="M27 48 h17 l-7 8 z" />
+              {/* Top Left Piece */}
+              <path d="M35 35 l11 10 v2 l-11 2 z" />
+              {/* Center Piece */}
+              <path d="M48 43 h12 l-7 6 z" />
             </svg>
           </div>
-          <span className="text-[18px] font-black tracking-[0.4em] text-brand-dark uppercase group-hover:text-brand-gold transition-colors duration-500">
+          <span className="text-[14px] font-black tracking-pro-wide text-white uppercase group-hover:text-brand-gold transition-colors duration-300">
             AccessDeal
           </span>
         </a>
 
-        <nav className="hidden lg:flex items-center gap-12">
+        <nav className="hidden lg:flex items-center gap-10" aria-label="Primary Navigation">
           {navLinks.map((link) => (
             <a 
               key={link.name}
               href={link.href}
-              className="text-[12px] font-black text-brand-dark hover:text-brand-gold transition-all duration-300 tracking-[0.2em] uppercase"
+              className="relative text-[11px] font-bold text-white/60 hover:text-white transition-all tracking-[0.2em] uppercase nav-link-underline"
             >
               {link.name}
             </a>
           ))}
         </nav>
 
-        <div className="hidden md:flex items-center gap-12">
-          <a href="#faq" className="text-[12px] font-black tracking-[0.3em] uppercase text-brand-dark/80 hover:text-brand-dark transition-colors">
-            Support
+        <div className="hidden md:flex items-center gap-8">
+          <a href="#faq" className="text-[11px] font-bold tracking-[0.3em] uppercase text-white/40 hover:text-white transition-colors">
+            Inquire
           </a>
-          <a href="#pricing" className="relative overflow-hidden bg-brand-dark text-white text-[12px] font-black tracking-[0.3em] px-12 py-5 rounded-sm hover:bg-brand-gold transition-all duration-500 uppercase shadow-lg">
-            Start Now
+          <a 
+            href="#pricing" 
+            className="bg-brand-gold text-brand-dark text-[11px] font-black tracking-widest px-10 py-4 rounded-full hover:shadow-soft-glow hover:scale-[1.03] active:scale-[0.98] transition-all duration-300 uppercase"
+          >
+            Get Started
           </a>
         </div>
 
         <button 
-          className="lg:hidden p-2 text-brand-dark flex flex-col items-end gap-2"
-          onClick={() => setIsMenuOpen(true)}
+          className="lg:hidden p-2 text-white"
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+          aria-expanded={isMenuOpen}
+          aria-label="Toggle Menu"
         >
-          <div className="w-10 h-[3px] bg-brand-dark"></div>
-          <div className="w-7 h-[3px] bg-brand-dark"></div>
+          <div className={`w-8 h-[2px] bg-white transition-all mb-2 ${isMenuOpen ? 'rotate-45 translate-y-2.5' : ''}`}></div>
+          <div className={`w-6 h-[2px] bg-white ml-auto transition-all ${isMenuOpen ? '-rotate-45 -translate-y-[2px] w-8' : ''}`}></div>
         </button>
       </div>
 
-      {isMenuOpen && (
-        <div className="fixed inset-0 bg-white z-[100] flex flex-col p-12 animate-in slide-in-from-right duration-500">
-          <div className="flex justify-between items-center mb-24">
-            <span className="text-[20px] font-black tracking-[0.4em] text-brand-dark uppercase">ACCESSDEAL</span>
-            <button onClick={() => setIsMenuOpen(false)} className="p-2 text-brand-dark">
-              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-            </button>
-          </div>
-          <nav className="flex flex-col gap-12">
-            {navLinks.map((link) => (
-              <a 
-                key={link.name}
-                href={link.href}
-                className="text-6xl font-serif font-bold text-brand-dark/30 hover:text-brand-dark transition-all duration-500"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                {link.name}
-              </a>
-            ))}
-          </nav>
+      {/* Mobile Drawer */}
+      <div className={`fixed inset-0 bg-brand-dark/95 backdrop-blur-2xl z-40 lg:hidden transition-transform duration-500 flex flex-col p-12 ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
+        <div className="mt-20 flex flex-col gap-10">
+          {navLinks.map((link) => (
+            <a 
+              key={link.name}
+              href={link.href}
+              onClick={() => setIsMenuOpen(false)}
+              className="text-5xl font-serif italic text-white/20 hover:text-brand-gold transition-all"
+            >
+              {link.name}
+            </a>
+          ))}
         </div>
-      )}
+      </div>
     </header>
   );
 };

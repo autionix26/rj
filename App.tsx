@@ -4,7 +4,6 @@ import Header from './components/Header';
 import Hero from './components/Hero';
 import CompanyMarquee from './components/CompanyMarquee';
 
-// Lazy load below-the-fold components
 const VideoSection = lazy(() => import('./components/VideoSection'));
 const Testimonials = lazy(() => import('./components/Testimonials'));
 const Process = lazy(() => import('./components/Process'));
@@ -14,9 +13,9 @@ const Pricing = lazy(() => import('./components/Pricing'));
 const FAQ = lazy(() => import('./components/FAQ'));
 const Footer = lazy(() => import('./components/Footer'));
 
-const LazySection: React.FC<{ children: React.ReactNode; id?: string }> = ({ children, id }) => {
+const ManagedSection: React.FC<{ children: React.ReactNode; id?: string }> = ({ children, id }) => {
   const [isVisible, setIsVisible] = useState(false);
-  const sectionRef = useRef<HTMLDivElement>(null);
+  const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -26,78 +25,71 @@ const LazySection: React.FC<{ children: React.ReactNode; id?: string }> = ({ chi
           observer.disconnect();
         }
       },
-      { rootMargin: '200px' }
+      { rootMargin: '15% 0px', threshold: 0.1 }
     );
 
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
-
+    if (sectionRef.current) observer.observe(sectionRef.current);
     return () => observer.disconnect();
   }, []);
 
   return (
-    <div 
+    <section 
       ref={sectionRef} 
       id={id} 
-      className={`section-fade-in ${isVisible ? 'section-visible' : ''}`}
-      style={{ minHeight: isVisible ? 'auto' : '100px' }}
+      className={`section-reveal ${isVisible ? 'visible' : ''}`}
     >
       {isVisible ? (
-        <Suspense fallback={<div className="h-64 w-full bg-brand-light opacity-50" />}>
+        <Suspense fallback={<div className="h-40 bg-brand-dark/50 animate-pulse" />}>
           {children}
         </Suspense>
-      ) : <div className="h-20" />}
-    </div>
+      ) : (
+        <div className="h-[20vh]" />
+      )}
+    </section>
   );
 };
 
 const App: React.FC = () => {
   return (
-    <div className="min-h-screen selection:bg-brand-dark selection:text-brand-light antialiased bg-brand-light text-brand-dark font-sans">
+    <div className="min-h-screen bg-brand-dark text-white antialiased">
       <Header />
       <main>
-        {/* TOP SECTION: HERO & VIDEO */}
-        <section id="hero">
+        <div id="top">
           <Hero />
-        </section>
-        
-        <div id="video" className="relative z-10">
-          <Suspense fallback={<div className="h-96 bg-brand-light" />}>
-            <VideoSection />
-          </Suspense>
         </div>
+        
+        <ManagedSection id="video">
+          <VideoSection />
+        </ManagedSection>
 
         <CompanyMarquee />
 
-        <LazySection id="process">
+        <ManagedSection id="process">
           <Process />
-        </LazySection>
+        </ManagedSection>
         
-        <LazySection id="testimonials">
+        <ManagedSection id="testimonials">
           <Testimonials />
-        </LazySection>
+        </ManagedSection>
         
-        <LazySection id="comparison">
+        <ManagedSection id="comparison">
           <Comparison />
-        </LazySection>
+        </ManagedSection>
         
-        <LazySection id="exclusivity">
+        <ManagedSection id="exclusivity">
           <Exclusivity />
-        </LazySection>
+        </ManagedSection>
         
-        <LazySection id="pricing">
+        <ManagedSection id="pricing">
           <Pricing />
-        </LazySection>
+        </ManagedSection>
         
-        <LazySection id="faq">
+        <ManagedSection id="faq">
           <FAQ />
-        </LazySection>
+        </ManagedSection>
       </main>
 
-      <LazySection>
-        <Footer />
-      </LazySection>
+      <Footer />
     </div>
   );
 };

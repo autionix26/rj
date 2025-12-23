@@ -30,38 +30,38 @@ const Testimonials: React.FC = () => {
   ];
 
   return (
-    <section id="testimonials" className="bg-white py-24 sm:py-32 md:py-56 relative overflow-hidden border-y border-brand-dark/5">
+    <section id="testimonials" className="bg-brand-dark py-16 md:py-32 relative overflow-hidden border-y border-white/5">
       <div className="max-w-[1440px] mx-auto px-6 sm:px-10 md:px-16">
         
-        <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-16 sm:mb-24 lg:mb-32 gap-10 sm:gap-12">
-          <div className="max-w-[720px]">
-            <span className="text-brand-gold text-[11px] font-bold uppercase tracking-[0.6em] mb-6 block">Partner Outcomes</span>
-            <h2 className="text-5xl sm:text-7xl md:text-8xl font-bold leading-tight text-brand-dark font-serif">
+        <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-12 sm:mb-20 gap-8 sm:gap-10">
+          <div className="max-w-[600px]">
+            <span className="text-brand-gold text-[10px] font-bold uppercase tracking-[0.5em] mb-4 block">Partner Outcomes</span>
+            <h2 className="text-4xl sm:text-6xl md:text-7xl font-bold leading-tight text-white font-serif">
               Validated <br />
-              <span className="italic text-brand-dark/30 font-normal">By Principals.</span>
+              <span className="italic text-white/20 font-normal">By Principals.</span>
             </h2>
           </div>
-          <div className="text-[12px] font-bold text-brand-dark uppercase tracking-[0.4em] max-w-[320px] leading-relaxed border-l-4 border-brand-gold pl-8">
+          <div className="text-[11px] font-bold text-white/40 uppercase tracking-[0.3em] max-w-[280px] leading-relaxed border-l-2 border-brand-gold pl-6">
             Full Case Audit reports available via secure partner dashboard login.
           </div>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-16">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
           {testimonials.map((t, i) => (
-            <div key={i} className="flex flex-col h-full group bg-brand-stone/20 p-8 rounded-sm hover:bg-white hover:shadow-premium transition-all duration-700">
-              <div className="mb-10">
-                 <span className="text-[11px] font-bold text-white bg-brand-dark px-6 py-2 rounded-full uppercase tracking-widest group-hover:bg-brand-gold transition-colors duration-500">
+            <div key={i} className="flex flex-col h-full group bg-white/5 p-8 rounded-sm hover:bg-white/[0.08] transition-all duration-700">
+              <div className="mb-8">
+                 <span className="text-[9px] font-bold text-brand-dark bg-brand-gold px-4 py-1.5 rounded-full uppercase tracking-widest transition-colors duration-500">
                    {t.stat}
                  </span>
               </div>
 
-              <blockquote className="text-[20px] sm:text-[22px] text-brand-dark leading-relaxed mb-12 font-bold italic font-serif">
+              <blockquote className="text-[16px] sm:text-[18px] text-white/80 leading-relaxed mb-10 font-bold italic font-serif">
                 "{t.quote}"
               </blockquote>
               
-              <div className="mt-auto pt-10 border-t border-brand-dark/10">
-                 <div className="font-bold text-brand-dark text-[14px] uppercase tracking-[0.2em] mb-2">{t.author}</div>
-                 <div className="text-[11px] text-brand-gold font-bold tracking-[0.3em] uppercase">{t.role}</div>
+              <div className="mt-auto pt-6 border-t border-white/5">
+                 <div className="font-bold text-white text-[12px] uppercase tracking-[0.15em] mb-1">{t.author}</div>
+                 <div className="text-[10px] text-brand-gold font-bold tracking-[0.2em] uppercase">{t.role}</div>
               </div>
             </div>
           ))}
